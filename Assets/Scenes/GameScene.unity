@@ -608,6 +608,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2368608531
       objectReference: {fileID: 0}
+    - target: {fileID: 926579392772589038, guid: 3cd9614c1f48efe41aac174100a38491, type: 3}
+      propertyPath: serverOnly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1832106534094308315, guid: 3cd9614c1f48efe41aac174100a38491, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21
@@ -651,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 8930514625759252781, guid: 3cd9614c1f48efe41aac174100a38491, type: 3}
       propertyPath: m_Name
       value: player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930514625759252781, guid: 3cd9614c1f48efe41aac174100a38491, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
