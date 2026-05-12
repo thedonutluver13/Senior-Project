@@ -22,6 +22,22 @@ public class GameManager : NetworkBehaviour
         if (gameOver) return;
 
         gameOver = true;
+
+        foreach (var kv in NetworkServer.spawned)
+        {
+            var m = kv.Value.GetComponent<movement>(); //disables lpayers from moving after someone dies
+            if (m != null)
+                m.enabled = false;
+
+            var rb = kv.Value.GetComponent<Rigidbody2D>(); //force velocity to go to 0
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;   // or rb.velocity = Vector2.zero (depending on your Unity version)
+                rb.angularVelocity = 0f;
+            }
+        }
+
+
         winnerNetId = winner;
 
         Debug.Log($"Game Over. Winner netId = {winnerNetId}");
@@ -36,5 +52,10 @@ public class GameManager : NetworkBehaviour
 
         if (gameOverUI != null)
             gameOverUI.ShowResult(winner);
+    }
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }

@@ -5,11 +5,14 @@ using Mirror;
 public class GameOverUI : MonoBehaviour
 {
     public TMP_Text resultText;
+   // public Image winImage;
+   // public Image loseImage;
 
     void Start()
     {
         resultText.gameObject.SetActive(false);
     }
+    
 
     public void ShowResult(uint winnerNetId)
     {
