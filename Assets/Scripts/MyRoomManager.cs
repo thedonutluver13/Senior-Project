@@ -31,6 +31,17 @@ public class MyRoomManager : NetworkRoomManager
 
     #region Server Callbacks
 
+    public override void Start()
+    {
+        base.Start();
+
+    #if !UNITY_WEBGL
+        if (Application.isBatchMode && !NetworkServer.active)
+            StartServer();
+    #endif
+    }
+
+
     /// <summary>
     /// This is called on the server when the server is started - including when a host is started.
     /// </summary>

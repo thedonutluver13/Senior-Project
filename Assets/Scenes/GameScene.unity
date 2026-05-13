@@ -852,8 +852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a06869c4f9d57040947567afaf8982e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
-  winImage: {fileID: 1953952573}
-  loseImage: {fileID: 1731515873}
+  resultText: {fileID: 1632097443}
 --- !u!114 &1949517278
 MonoBehaviour:
   m_ObjectHideFlags: 0

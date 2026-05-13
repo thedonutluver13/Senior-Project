@@ -315,10 +315,10 @@ MonoBehaviour:
   port: 27777
   batchSend: 1
   waitBeforeSend: 1
-  clientUseWss: 0
+  clientUseWss: 1
   clientWebsocketSettings:
-    ClientPortOption: 0
-    CustomClientPort: 7777
+    ClientPortOption: 2
+    CustomClientPort: 443
   minimumLogLevel: 3
 --- !u!114 &589508832
 MonoBehaviour:
@@ -355,7 +355,7 @@ MonoBehaviour:
   onlineScene: Assets/Scenes/GameScene.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 589508831}
-  networkAddress: 127.0.0.1
+  networkAddress: starspacebattle.duckdns.org
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
