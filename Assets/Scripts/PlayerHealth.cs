@@ -27,7 +27,7 @@ public class PlayerHealth : NetworkBehaviour
                 }
             }
 
-            NetworkServer.Destroy(gameObject);
+            //NetworkServer.Destroy(gameObject);
         }
     }
 }

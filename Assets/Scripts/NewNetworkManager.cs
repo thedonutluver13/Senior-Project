@@ -12,8 +12,8 @@ public class NewNetworkManager : NetworkManager
 {
     public Transform spawnBottom;
     public Transform spawnTop;
-
-    private int playerCount = 0;
+    public GameObject player1prefab;
+    public GameObject player2prefab;
 
     // Overrides the base singleton so we don't
     // have to cast to this type everywhere.
@@ -42,6 +42,12 @@ public class NewNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
+
+        //# before if, endif compile-time directives
+        #if !UNITY_WEBGL
+                if (Application.isBatchMode && !NetworkServer.active)
+                    StartServer();
+        #endif
     }
 
     /// <summary>
@@ -153,27 +159,33 @@ public class NewNetworkManager : NetworkManager
     /// </summary>
     /// <param name="conn">Connection from client.</param>
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-    {
+    {   //will have at most 2 players for now
+        int playerIndex = numPlayers;
+
+        if (playerIndex >= 2)
+        {
+            conn.Disconnect(); //disconnect if more than 2 players are in lobby
+            return;
+        }
+
         GameObject player;
 
-        if (playerCount == 0)
+        if (playerIndex == 0)
         {
-            player = Instantiate(playerPrefab, spawnBottom.position, Quaternion.identity);
+            player = Instantiate(player1prefab, spawnBottom.position, Quaternion.identity);
 
             movement m = player.GetComponent<movement>();
             m.side = movement.Side.Bottom;
         }
         else
         {
-            player = Instantiate(playerPrefab, spawnTop.position, Quaternion.Euler(0, 0, 180f));
+            player = Instantiate(player2prefab, spawnTop.position, Quaternion.Euler(0, 0, 180f));
 
             movement m = player.GetComponent<movement>();
             m.side = movement.Side.Top;
         }
 
         NetworkServer.AddPlayerForConnection(conn, player);
-
-        playerCount++;
     }
 
     /// <summary>
@@ -262,7 +274,6 @@ public class NewNetworkManager : NetworkManager
     public override void OnStartServer()
     {
         base.OnStartServer();
-        playerCount = 0;
     }
 
     /// <summary>
